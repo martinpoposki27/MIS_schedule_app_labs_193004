@@ -109,22 +109,37 @@ class _NovElementState extends State<NovElement> {
         ),
         ElevatedButton(
           child: const Text('Add'),
-          onPressed: () {
-            _submitData;
-            Navigator.pop(context);
+          onPressed: () async {
+            //_submitData;
+            //Navigator.pop(context);
+            setState(() {
+            if(_subjectController.text.isEmpty) {
+              return;
+            }
+            final enteredSubject = _subjectController.text;
+            // if(_locationController.text.isEmpty) {
+            //   return;
+            // }
+            final enteredLocation = _locationController.text;
+            // final enteredDateTime = DateTime.parse(_dateTimeController.text);
+            // print(enteredDateTime);
+            final newItem = ListItem(nanoid(5), enteredSubject, dateTime, enteredLocation);
+            widget.addItem(newItem);
+            Navigator.of(context).pop();
+            });
           },
         ),
-        Text(
-          'If the "Add" button is not working, please use the',
-          textAlign: TextAlign.center,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange),
-        ),
-        Text('"Done" button from your keyboard!',
-          textAlign: TextAlign.center,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange),
-        ),
+//         Text(
+//           'If the "Add" button is not working, please use the',
+//           textAlign: TextAlign.center,
+//           overflow: TextOverflow.ellipsis,
+//           style: const TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange),
+//         ),
+//         Text('"Done" button from your keyboard!',
+//           textAlign: TextAlign.center,
+//           overflow: TextOverflow.ellipsis,
+//           style: const TextStyle(fontWeight: FontWeight.normal, color: Colors.deepOrange),
+//         ),
       ],
       ),
     );
